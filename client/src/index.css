@@ -1,0 +1,298 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.125rem;
+
+  /* VIVAH — ivory, bone, deep wine, antique gold */
+  --background: #f8f4ec;
+  --foreground: #1c1917;
+  --card: #fdfbf6;
+  --card-foreground: #1c1917;
+  --primary: #4a1220;
+  --primary-foreground: #f8f4ec;
+  --secondary: #efe7d9;
+  --secondary-foreground: #4a1220;
+  --muted: #efe7d9;
+  --muted-foreground: #7a6f63;
+  --accent: #b08d57;
+  --accent-foreground: #fdfbf6;
+  --destructive: #8c2f2f;
+  --destructive-foreground: #fdfbf6;
+  --border: #e2d8c6;
+  --input: #e2d8c6;
+  --ring: #b08d57;
+
+  --wine: #4a1220;
+  --wine-deep: #350c16;
+  --gold: #b08d57;
+  --gold-soft: #d4bb92;
+  --ivory: #f8f4ec;
+  --bone: #efe7d9;
+  --ink: #1c1917;
+}
+
+.dark {
+  --background: #1a1113;
+  --foreground: #f3ece0;
+  --card: #241619;
+  --card-foreground: #f3ece0;
+  --primary: #d4bb92;
+  --primary-foreground: #2a0d14;
+  --secondary: #2e1c20;
+  --secondary-foreground: #f3ece0;
+  --muted: #2e1c20;
+  --muted-foreground: #b3a496;
+  --accent: #d4bb92;
+  --accent-foreground: #2a0d14;
+  --destructive: #c25b5b;
+  --destructive-foreground: #1a1113;
+  --border: #3a2529;
+  --input: #3a2529;
+  --ring: #d4bb92;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-wine: var(--wine);
+  --color-wine-deep: var(--wine-deep);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ivory: var(--ivory);
+  --color-bone: var(--bone);
+  --color-ink: var(--ink);
+
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 0.0625rem;
+  --radius-md: 0.125rem;
+  --radius-lg: 0.125rem;
+  --radius-xl: 0.25rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--gold-soft);
+    color: var(--wine-deep);
+  }
+}
+
+@layer components {
+  /* Wide-tracked small caps eyebrow — the brand's signature label */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+    line-height: 0.98;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+
+  .display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 300;
+  }
+
+  .display-md {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+    line-height: 1.15;
+    font-weight: 400;
+  }
+
+  .body-lg {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .caption {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  /* Hairline gold rule */
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+  }
+
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  .btn-wine {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--wine);
+    color: var(--ivory);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1rem 2.25rem;
+    border: 1px solid var(--wine);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-wine:hover {
+    background: var(--wine-deep);
+    border-color: var(--wine-deep);
+  }
+  .btn-wine:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--wine);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1rem 2.25rem;
+    border: 1px solid var(--gold);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-outline:hover {
+    background: var(--wine);
+    color: var(--ivory);
+    border-color: var(--wine);
+  }
+
+  .field {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: var(--foreground);
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .field:focus {
+    border-bottom-color: var(--gold);
+  }
+  .field::placeholder {
+    color: var(--muted-foreground);
+    opacity: 0.7;
+  }
+
+  .fade-up {
+    animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-img {
+  animation: slowZoom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hide number input spinners in quantity fields */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
